@@ -1,12 +1,12 @@
 "use client";
 import { useState } from "react";
-import emailjs from "emailjs-com";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent } from "@/components/ui/card";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
+import { API_BASE_URL } from "@/lib/api-config";
 
 function Contact() {
   const [formData, setFormData] = useState({ name: "", email: "", phone: "", message: "" });
@@ -21,7 +21,7 @@ function Contact() {
     e.preventDefault();
     setIsSending(true);
     try {
-      const response = await fetch("http://localhost:5000/api/contacts", {
+      const response = await fetch(`${API_BASE_URL}/api/contacts`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
